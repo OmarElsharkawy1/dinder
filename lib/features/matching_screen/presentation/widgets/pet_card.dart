@@ -33,56 +33,34 @@ class PetCard extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
-                        child: Text(
-                          'Dexter, 4',
-                          style: TextStyle(
-                            fontSize: 20.sp,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white,
-                            shadows: const <Shadow>[
-                              Shadow(
-                                offset: Offset(2.0, 2.0),
-                                blurRadius: 2.0,
-                                color: AppColors.primaryColor,
-                              ),
-                              // Shadow(
-                              //   offset: Offset(3.0, 3.0),
-                              //   blurRadius: 8.0,
-                              //   color: Color.fromARGB(125, 0, 0, 255),
-                              // ),
-                            ],
-                          ),
-                        ),
+                      Text('Toby',
+                          style: Theme.of(context).textTheme.titleMedium),
+                      SizedBox(height: 12.h),
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Icon(Icons.male),
+                          Text('Male'),
+                          Spacer(),
+                          Icon(Icons.cake_outlined),
+                          Text('4 years old'),
+                        ],
                       ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8, vertical: 8),
-                        child: Text(
-                          '3km away',
-                          style: TextStyle(
-                            fontSize: 20.sp,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white,
-                            shadows: const <Shadow>[
-                              Shadow(
-                                offset: Offset(2.0, 2.0),
-                                blurRadius: 2.0,
-                                color: AppColors.primaryColor,
-                              ),
-                            ],
-                          ),
-                        ),
+                      SizedBox(height: 12.h),
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Icon(Icons.difference),
+                          Text('Golden Retriever'),
+                          Spacer(),
+                          Icon(Icons.monitor_weight_outlined),
+                          Text('12 kg'),
+                        ],
                       ),
+                      SizedBox(height: 8),
                     ],
                   ),
                   Row(

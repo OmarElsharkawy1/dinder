@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:pile_up/core/resource_manager/asset_path.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/widgets/app_bar.dart';
 import 'package:pile_up/core/widgets/custom_text.dart';
 import 'package:pile_up/core/widgets/drawer.dart';
+import 'package:pile_up/features/chat_screen/presentation/chat_screen.dart';
 
 class MessagesScreen extends StatefulWidget {
   const MessagesScreen({Key? key}) : super(key: key);
@@ -46,11 +48,25 @@ class _MessagesScreenState extends State<MessagesScreen> {
                 itemBuilder: (context, i) {
                   return Column(
                     children: [
-                      MessageCard(
-                        messengers: Messenger(
-                          messengerName: 'Aya',
-                          messengerText: 'When can I see you dog in public?',
-                          messengerImage: AssetPath.logo,
+                      InkWell(
+                        highlightColor: AppColors.backgroundColor,
+                        hoverColor: AppColors.backgroundColor,
+                        focusColor: AppColors.backgroundColor,
+                        onTap: () {
+                          PersistentNavBarNavigator.pushNewScreen(
+                            context,
+                            screen: const ChatScreen(),
+                            withNavBar: false,
+                            pageTransitionAnimation:
+                                PageTransitionAnimation.fade,
+                          );
+                        },
+                        child: MessageCard(
+                          messengers: Messenger(
+                            messengerName: 'Aya',
+                            messengerText: 'When can I see you dog in public?',
+                            messengerImage: AssetPath.logo,
+                          ),
                         ),
                       ),
                       if (i != 15)

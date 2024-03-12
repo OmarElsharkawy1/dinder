@@ -3,13 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:pile_up/core/widgets/drawer.dart';
 import 'package:pile_up/features/messages_screen/presentation/messages_screen.dart';
+import 'package:pile_up/features/my_pets_screen/presentation/my_pets_screen.dart';
 
 import 'core/resource_manager/colors.dart';
 import 'features/matching_screen/presentation/matching_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
-  static int mainIndex = 1;
+  static int mainIndex = 2;
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -21,6 +22,7 @@ class _MainScreenState extends State<MainScreen> {
   List<Widget> _buildScreens() {
     return [
       const MatchingScreen(),
+      const MyPetsScreen(),
       const MatchingScreen(),
       const MessagesScreen(),
       // const HomeScreen(),
@@ -34,6 +36,11 @@ class _MainScreenState extends State<MainScreen> {
         activeColorPrimary: AppColors.primaryColor,
         icon: Icon(Icons.person, size: 30.h),
         inactiveIcon: Icon(Icons.person_outline, size: 30.h),
+      ),
+      PersistentBottomNavBarItem(
+        activeColorPrimary: AppColors.primaryColor,
+        icon: Icon(Icons.pets, size: 30.h),
+        inactiveIcon: Icon(Icons.pets_outlined, size: 30.h),
       ),
       PersistentBottomNavBarItem(
         activeColorPrimary: AppColors.primaryColor,

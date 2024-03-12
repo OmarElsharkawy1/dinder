@@ -3,6 +3,7 @@ const String pathImage = "assets/images";
 class AssetPath {
   //new
   static const String logo = '$pathImage/logo.png';
+  static const String dogImage = '$pathImage/dog.jpg';
   static const String logo1 = '$pathImage/logo1.png';
   static const String apple = '$pathImage/apple.png';
   static const String google = '$pathImage/google.png';
