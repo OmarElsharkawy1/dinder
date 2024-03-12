@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:pile_up/core/resource_manager/asset_path.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/resource_manager/routes.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
@@ -147,9 +146,9 @@ class HomeDrawer extends StatelessWidget {
                 ListTile(
                   title: const Row(
                     children: [
-                      Icon(Icons.favorite),
+                      Icon(Icons.pets),
                       SizedBox(width: 8),
-                      Text("Favorite"),
+                      Text("My Pets"),
                     ],
                   ),
                   onTap: () {},

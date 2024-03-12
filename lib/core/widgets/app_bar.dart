@@ -1,27 +1,25 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pile_up/core/resource_manager/asset_path.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
-import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/custom_text.dart';
-import 'package:pile_up/core/widgets/custom_text_field.dart';
 import 'package:pile_up/core/widgets/notification_row.dart';
 
 AppBar appBar(BuildContext context,
     {required String text, void Function()? actionsOnPressed}) {
   return AppBar(
-    backgroundColor: AppColors.primaryColor,
-    elevation: 1,
+    backgroundColor: AppColors.backgroundColor,
+    elevation: 0,
     title: CustomText(
       text: text,
-      fontSize: AppSize.defaultSize! * 2.2,
+      fontSize: 22.sp,
       color: Colors.white,
       fontWeight: FontWeight.w600,
     ),
     actions: [
       Padding(
-        padding: EdgeInsets.only(right: AppSize.defaultSize! * 1.5),
+        padding: EdgeInsets.only(right: 15.w),
         child: IconButton(
           onPressed: actionsOnPressed ??
               () {
@@ -72,64 +70,48 @@ AppBar authAppBar(BuildContext context,
   );
 }
 
-AppBar homeAppBar(BuildContext context,
-    {String? text,
-    void Function()? actionsOnPressed,
-    void Function()? leadingOnPressed,
-    Widget? widget,
-    bool leading = true,
-    bool bottom = false}) {
+AppBar homeAppBar(
+  BuildContext context, {
+  required IconData actionIcon,
+  String? text,
+  void Function()? actionsOnPressed,
+  GlobalKey<ScaffoldState>? leadingKey,
+  Widget? centerWidget,
+  bool leading = true,
+}) {
   return AppBar(
-    backgroundColor: AppColors.primaryColor,
-    elevation: 1,
-    bottom: bottom
-        ? PreferredSize(
-            preferredSize: Size(AppSize.screenWidth!, AppSize.defaultSize! * 5),
-            child: Container(
-              width: AppSize.screenWidth!,
-              height: AppSize.defaultSize! * 5,
-              color: Colors.white,
-              child: CustomTextField(
-                hintText: StringManager.searchFor.tr(),
-                hintStyle:
-                    TextStyle(color: AppColors.greyColor.withOpacity(.5)),
-                suffixIcon: Icon(
-                  Icons.search,
-                  color: AppColors.greyColor.withOpacity(.5),
-                ),
-              ),
-            ),
-          )
-        : const PreferredSize(preferredSize: Size(0, 0), child: SizedBox()),
-    title: widget ??
-        Image.asset(
-          AssetPath.logo,
-          width: AppSize.defaultSize! * 4.2,
-          height: AppSize.defaultSize! * 3.2,
-        ),
+    backgroundColor: AppColors.backgroundColor,
+    // foregroundColor: AppColors.backgroundColor,
+    surfaceTintColor: AppColors.backgroundColor,
+    elevation: 0,
+    title: centerWidget ?? Container(),
     centerTitle: true,
-    leading: leading
-        ? IconButton(
-            onPressed: leadingOnPressed,
-            icon: Image.asset(
-              AssetPath.menu,
-              width: AppSize.defaultSize! * 2,
-              height: AppSize.defaultSize! * 2,
-            ),
-          )
-        : const SizedBox(),
+    leading: IconButton(
+      onPressed: () {
+        if (leadingKey!.currentState!.isDrawerOpen) {
+          leadingKey.currentState!.closeDrawer();
+          //close drawer, if drawer is open
+        } else {
+          leadingKey.currentState!.openDrawer();
+          //open drawer, if drawer is closed
+        }
+      },
+      icon: Image.asset(
+        AssetPath.menu,
+        color: AppColors.iconColor,
+        width: 20.w,
+        height: 20.w,
+      ),
+    ),
     actions: [
       IconButton(
-        onPressed: actionsOnPressed ??
-            () {
-              showNotification(context);
-            },
-        icon: Image.asset(
-          AssetPath.notification,
-          width: AppSize.defaultSize! * 2.5,
-          height: AppSize.defaultSize! * 2.5,
+        onPressed: actionsOnPressed,
+        icon: Icon(
+          actionIcon,
+          size: 20.h,
+          color: AppColors.iconColor,
         ),
-      )
+      ),
     ],
   );
 }

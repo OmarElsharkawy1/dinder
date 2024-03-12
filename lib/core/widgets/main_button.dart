@@ -83,7 +83,7 @@ class SecondButton extends StatelessWidget {
         height: height ?? AppSize.defaultSize! * 4,
         width: width ?? AppSize.screenWidth! * .9,
         decoration: BoxDecoration(
-            color: color ?? AppColors.backGroundColor,
+            color: color ?? AppColors.backgroundColor,
             borderRadius: BorderRadius.circular(AppSize.defaultSize!),
             border: Border.all(color: AppColors.primaryColor)),
         child: Center(

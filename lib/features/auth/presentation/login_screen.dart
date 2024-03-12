@@ -104,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
           MainButton(
             text: StringManager.login.tr(),
             onTap: () {
-              Navigator.pushNamed(context, Routes.home);
+              Navigator.pushNamed(context, Routes.mainScreen);
             },
             width: AppSize.screenWidth! * .9,
           ),
@@ -119,40 +119,22 @@ class _LoginScreenState extends State<LoginScreen> {
                 fontWeight: FontWeight.w700),
           ),
           SizedBox(
-            height: 40.h,
+            height: 4.h,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                AssetPath.google,
-                scale: 2.5,
-              ),
-              SizedBox(
-                width: 20.w,
-              ),
-              Image.asset(
-                AssetPath.facebook,
-                scale: 2.5,
-              ),
-              SizedBox(
-                width: 20.w,
-              ),
-              Image.asset(
-                AssetPath.apple,
-                scale: 2.5,
-              ),
-              SizedBox(
-                width: 20.w,
-              ),
-              Image.asset(
-                AssetPath.google,
-                scale: 2.5,
-              ),
+              Image.asset(AssetPath.google, scale: 2.5),
+              SizedBox(width: 20.w),
+              Image.asset(AssetPath.facebook, scale: 2.5),
+              SizedBox(width: 20.w),
+              Image.asset(AssetPath.apple, scale: 2.5),
+              SizedBox(width: 20.w),
+              Image.asset(AssetPath.google, scale: 2.5),
             ],
           ),
           SizedBox(
-            height: AppSize.screenHeight! * .1,
+            height: 10.h,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -176,9 +158,10 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ],
           ),
-          SizedBox(
-            height: 40.h,
-          ),
+          // SizedBox(
+          //   height: 40.h,
+          // ),
+          const Spacer(),
         ],
       ),
     );

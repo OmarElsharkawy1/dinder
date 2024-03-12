@@ -4,7 +4,8 @@ import 'package:pile_up/features/auth/presentation/forget%20password/forget_pass
 import 'package:pile_up/features/auth/presentation/forget%20password/send_otp_code.dart';
 import 'package:pile_up/features/auth/presentation/login_screen.dart';
 import 'package:pile_up/features/auth/presentation/signup/sign_up.dart';
-import 'package:pile_up/features/home_page/presentation/home_page.dart';
+import 'package:pile_up/features/matching_screen/presentation/matching_screen.dart';
+import 'package:pile_up/main_screen.dart';
 
 class Routes {
   static const String login = "/login";
@@ -12,23 +13,25 @@ class Routes {
   static const String forgetPassword = "/forgetPassword";
   static const String sendOTPCode = "/sendOTPCode";
   static const String changePassword = "/changePassword";
+  static const String mainScreen = "/mainScreen";
+  static const String messagesScreen = "/messagesScreen";
   // static const String profile = "/profile";
   // static const String onBoarding = "/OnBoarding";
-  static const String home = "/home";
+  static const String matchingScreen = "/matchingScreen";
 }
 
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
-      // case Routes.main:
-      //   return PageRouteBuilder(
-      //       pageBuilder: (context, animation, secondaryAnimation) =>
-      //           const MainScreen(),
-      //       transitionsBuilder: customAnimate);
-      case Routes.home:
+      case Routes.mainScreen:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                const HomeScreen(),
+                const MainScreen(),
+            transitionsBuilder: customAnimate);
+      case Routes.matchingScreen:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const MatchingScreen(),
             transitionsBuilder: customAnimate);
       case Routes.login:
         return PageRouteBuilder(
