@@ -34,26 +34,6 @@ class _MatchingScreenState extends State<MatchingScreen> {
         padding: EdgeInsets.symmetric(horizontal: 8.w),
         child: Column(
           children: [
-            //Category Container
-            // Padding(
-            //   padding: const EdgeInsets.only(top: 8),
-            //   child: Container(
-            //     height: context.height * .15,
-            //     decoration: BoxDecoration(
-            //         color: AppColors.categoryContainer,
-            //         borderRadius: BorderRadius.circular(15)),
-            //     child: const Row(
-            //       crossAxisAlignment: CrossAxisAlignment.center,
-            //       mainAxisAlignment: MainAxisAlignment.spaceAround,
-            //       children: [
-            //         CustomIcon(text: 'All', icon: Icons.all_inclusive),
-            //         CustomIcon(text: 'Dogs', icon: Icons.pets),
-            //         CustomIcon(text: 'Cats', icon: Icons.pets),
-            //         CustomIcon(text: 'Birds', icon: Icons.pets),
-            //       ],
-            //     ),
-            //   ),
-            // ),
             SizedBox(height: 8.h),
             const Draggable(
               feedback: PetCard(),

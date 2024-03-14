@@ -1,10 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pile_up/core/resource_manager/asset_path.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/resource_manager/routes.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/app_size.dart';
+import 'package:pile_up/core/utils/media_query_values.dart';
 
 import 'custom_text.dart';
 
@@ -128,6 +131,7 @@ class HomeDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      width: context.width * .75,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -137,35 +141,42 @@ class HomeDrawer extends StatelessWidget {
             decoration: BoxDecoration(
               color: AppColors.primaryColor.withOpacity(0.7),
             ),
-            currentAccountPictureSize: const Size.square(72.0),
-            currentAccountPicture: const Icon(Icons.account_circle, size: 72),
+            currentAccountPictureSize: const Size.square(70.0),
+            currentAccountPicture: ClipRRect(
+              borderRadius: BorderRadius.circular(35),
+              child: Image.asset(
+                AssetPath.profilePic,
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
           Expanded(
-            child: ListView(
-              children: [
-                ListTile(
-                  title: const Row(
+            child: ListView.builder(
+              itemCount: 3,
+              itemBuilder: (context, i) {
+                return ListTile(
+                  title: Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(Icons.pets),
-                      SizedBox(width: 8),
-                      Text("My Pets"),
+                      CircleAvatar(
+                        radius: 25,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(25),
+                          child: Image.asset(AssetPath.dogImage),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 16.w,
+                      ),
+                      Text("Pet",
+                          style: Theme.of(context).textTheme.headlineLarge),
                     ],
                   ),
                   onTap: () {},
-                ),
-                ListTile(
-                  title: const Row(
-                    children: [
-                      Icon(Icons.history),
-                      SizedBox(width: 8),
-                      Text("History"),
-                    ],
-                  ),
-                  onTap: () {},
-                ),
-              ],
+                );
+              },
             ),
-          )
+          ),
         ],
       ),
     );

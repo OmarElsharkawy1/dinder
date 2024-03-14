@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:pile_up/core/resource_manager/asset_path.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
+import 'package:pile_up/core/resource_manager/routes.dart';
 import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/custom_text.dart';
 import 'package:pile_up/core/widgets/notification_row.dart';
+import 'package:pile_up/features/matching_screen/presentation/filter.dart';
 
 AppBar appBar(BuildContext context,
     {required String text, void Function()? actionsOnPressed}) {
@@ -105,7 +108,14 @@ AppBar homeAppBar(
     ),
     actions: [
       IconButton(
-        onPressed: actionsOnPressed,
+        onPressed: () {
+          PersistentNavBarNavigator.pushNewScreen(
+            context,
+            screen: const MatchingFilter(),
+            withNavBar: false,
+            pageTransitionAnimation: PageTransitionAnimation.fade,
+          );
+        },
         icon: Icon(
           actionIcon,
           size: 20.h,

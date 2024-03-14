@@ -12,24 +12,31 @@ class PetCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: AppColors.categoryContainer,
-        borderRadius: BorderRadius.circular(25),
+        borderRadius: BorderRadius.circular(15),
       ),
       // height of appbar 50, navigation bar 50, 8 padding
       height: context.height - 120.h,
       width: context.width * .96,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Stack(
-          children: [
-            Align(
-                alignment: Alignment.topCenter,
+      child: Stack(
+        children: [
+          Align(
+              alignment: Alignment.topCenter,
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(15.r),
+                  topLeft: Radius.circular(15.r),
+                ),
                 child: Image.asset(
-                  AssetPath.logo,
-                  height: context.height * .5,
-                  // fit: BoxFit.fill,
-                )),
-            Align(
-              alignment: Alignment.bottomCenter,
+                  AssetPath.dogImage,
+                  height: context.height * .55,
+                  width: double.infinity,
+                  fit: BoxFit.fill,
+                ),
+              )),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -80,9 +87,9 @@ class PetCard extends StatelessWidget {
                   ),
                 ],
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }

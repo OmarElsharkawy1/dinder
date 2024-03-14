@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pile_up/core/resource_manager/asset_path.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 
-class PersonalDogCard extends StatelessWidget {
-  const PersonalDogCard({Key? key}) : super(key: key);
+class MyPetCard extends StatelessWidget {
+  const MyPetCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

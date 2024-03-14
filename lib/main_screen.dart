@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:pile_up/core/widgets/drawer.dart';
+import 'package:pile_up/features/e_commerce_screen/e_commerce_screen.dart';
 import 'package:pile_up/features/messages_screen/presentation/messages_screen.dart';
-import 'package:pile_up/features/my_pets_screen/presentation/my_pets_screen.dart';
+import 'package:pile_up/features/my_profile_screen/prsentation/my_profile_screen.dart';
 
 import 'core/resource_manager/colors.dart';
 import 'features/matching_screen/presentation/matching_screen.dart';
@@ -21,8 +22,8 @@ class _MainScreenState extends State<MainScreen> {
 
   List<Widget> _buildScreens() {
     return [
-      const MatchingScreen(),
-      const MyPetsScreen(),
+      const MyProfileScreen(),
+      const ECommerceScreen(),
       const MatchingScreen(),
       const MessagesScreen(),
       // const HomeScreen(),
@@ -39,8 +40,8 @@ class _MainScreenState extends State<MainScreen> {
       ),
       PersistentBottomNavBarItem(
         activeColorPrimary: AppColors.primaryColor,
-        icon: Icon(Icons.pets, size: 30.h),
-        inactiveIcon: Icon(Icons.pets_outlined, size: 30.h),
+        icon: Icon(Icons.shopping_bag_rounded, size: 30.h),
+        inactiveIcon: Icon(Icons.shopping_bag_outlined, size: 30.h),
       ),
       PersistentBottomNavBarItem(
         activeColorPrimary: AppColors.primaryColor,

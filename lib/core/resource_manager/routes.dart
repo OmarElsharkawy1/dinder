@@ -5,9 +5,10 @@ import 'package:pile_up/features/auth/presentation/forget%20password/send_otp_co
 import 'package:pile_up/features/auth/presentation/login_screen.dart';
 import 'package:pile_up/features/auth/presentation/signup/sign_up.dart';
 import 'package:pile_up/features/chat_screen/presentation/chat_screen.dart';
+import 'package:pile_up/features/matching_screen/presentation/filter.dart';
 import 'package:pile_up/features/matching_screen/presentation/matching_screen.dart';
 import 'package:pile_up/features/messages_screen/presentation/messages_screen.dart';
-import 'package:pile_up/features/my_pets_screen/presentation/my_pets_screen.dart';
+import 'package:pile_up/features/my_profile_screen/prsentation/my_profile_screen.dart';
 import 'package:pile_up/main_screen.dart';
 
 class Routes {
@@ -19,10 +20,10 @@ class Routes {
   static const String mainScreen = "/mainScreen";
   static const String messagesScreen = "/messagesScreen";
   static const String chatScreen = "/chatScreen";
-  static const String myPetsScreen = "/myPetsScreen";
-  // static const String profile = "/profile";
+  static const String myProfileScreen = "/MyProfileScreen";
   // static const String onBoarding = "/OnBoarding";
   static const String matchingScreen = "/matchingScreen";
+  static const String matchingFilterScreen = "/matchingFilterScreen";
 }
 
 class RouteGenerator {
@@ -38,21 +39,28 @@ class RouteGenerator {
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const MatchingScreen(),
             transitionsBuilder: customAnimate);
-      case Routes.messagesScreen:
+      case Routes.matchingFilterScreen:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                const MessagesScreen(),
+                const MatchingFilter(),
             transitionsBuilder: customAnimate);
-      case Routes.myPetsScreen:
+
+      case Routes.myProfileScreen:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                const MyPetsScreen(),
+                const MyProfileScreen(),
             transitionsBuilder: customAnimate);
       case Routes.chatScreen:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const ChatScreen(),
             transitionsBuilder: customAnimate);
+      case Routes.messagesScreen:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const MessagesScreen(),
+            transitionsBuilder: customAnimate);
+
       case Routes.login:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>

@@ -5,6 +5,8 @@ class AppColors {
   static const Color categoryContainer = Color.fromRGBO(235, 242, 247, 1.0);
   static const Color backgroundColor = Colors.white;
   static const Color iconColor = Colors.black;
+  static const Color activeTrackSliderColor = Colors.black;
+  static const Color inactiveTrackSliderColor = Colors.black;
 
   static const Color blackLow = Color.fromRGBO(47, 47, 47, 1);
   static const Color blackMedium = Color.fromRGBO(48, 48, 49, 1);
