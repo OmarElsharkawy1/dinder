@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:pile_up/core/resource_manager/asset_path.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/media_query_values.dart';
 import 'package:pile_up/core/widgets/app_bar.dart';
 import 'package:pile_up/core/widgets/drawer.dart';
+import 'package:pile_up/features/my_pet_details/presentation/my_pet_details_screen.dart';
 import 'package:pile_up/features/my_profile_screen/prsentation/widgets/my_pets_card.dart';
 
 class MyProfileScreen extends StatefulWidget {
@@ -100,7 +102,17 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                   shrinkWrap: true,
                   physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, i) {
-                    return const MyPetCard();
+                    return InkWell(
+                        onTap: () {
+                          PersistentNavBarNavigator.pushNewScreen(
+                            context,
+                            screen: const MyPetDetailsScreen(),
+                            withNavBar: false,
+                            pageTransitionAnimation:
+                                PageTransitionAnimation.fade,
+                          );
+                        },
+                        child: const MyPetCard());
                   }),
             ],
           ),
