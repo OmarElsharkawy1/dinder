@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:pile_up/core/resource_manager/asset_path.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/resource_manager/routes.dart';
@@ -9,6 +11,10 @@ import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/column_with_text_field.dart';
 import 'package:pile_up/core/widgets/custom_text.dart';
 import 'package:pile_up/core/widgets/main_button.dart';
+import 'package:pile_up/core/widgets/snack_bar.dart';
+import 'package:pile_up/features/auth/presentation/controller/login_bloc/login_with_email_and_password_bloc.dart';
+import 'package:pile_up/features/auth/presentation/controller/login_bloc/login_with_email_and_password_events.dart';
+import 'package:pile_up/main_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -102,11 +108,15 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
           MainButton(
-            text: StringManager.login.tr(),
+            text: StringManager.signIn.tr(),
             onTap: () {
-              Navigator.pushNamed(context, Routes.mainScreen);
+              if (validation()) {
+                Navigator.pushNamed(context, Routes.mainScreen);
+              } else {
+                errorSnackBar(
+                    context, StringManager.pleaseCompleteYourData.tr());
+              }
             },
-            width: AppSize.screenWidth! * .9,
           ),
           SizedBox(
             height: 40.h,
@@ -165,5 +175,15 @@ class _LoginScreenState extends State<LoginScreen> {
         ],
       ),
     );
+  }
+
+  bool validation() {
+    if (emailController.text == '') {
+      return false;
+    } else if (passwordController.text == '') {
+      return false;
+    } else {
+      return true;
+    }
   }
 }

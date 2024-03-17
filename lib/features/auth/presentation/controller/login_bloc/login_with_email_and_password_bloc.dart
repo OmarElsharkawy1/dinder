@@ -5,16 +5,17 @@ import 'package:pile_up/features/auth/domain/use_case/login_with_email_and_passw
 import 'package:pile_up/features/auth/presentation/controller/login_bloc/login_with_email_and_password_events.dart';
 import 'package:pile_up/features/auth/presentation/controller/login_bloc/login_with_email_and_password_states.dart';
 
-class LoginWithEmailAndPasswordBloc extends Bloc<BaseLoginWithEmailAndPasswordEvent,
-    LoginWithEmailAndPasswordState> {
+class LoginWithEmailAndPasswordBloc extends Bloc<
+    BaseLoginWithEmailAndPasswordEvent, LoginWithEmailAndPasswordState> {
   LoginWithEmailAndPasswordUseCase loginWithEmailAndPasswordUseCase;
 
-  LoginWithEmailAndPasswordBloc({required this.loginWithEmailAndPasswordUseCase})
+  LoginWithEmailAndPasswordBloc(
+      {required this.loginWithEmailAndPasswordUseCase})
       : super(LoginWithEmailAndPasswordInitial()) {
     on<LoginWithEmailAndPasswordEvent>((event, emit) async {
       emit(const LoginWithEmailAndPasswordLoadingState());
       final result = await loginWithEmailAndPasswordUseCase
-          .call(AuthModel(email: event.phone, password: event.password));
+          .call(AuthModel(email: event.email, password: event.password));
       result.fold(
           (l) => emit(const LoginWithEmailAndPasswordSuccessMessageState(
               successMessage: StringManager.loginSuccessfully)),

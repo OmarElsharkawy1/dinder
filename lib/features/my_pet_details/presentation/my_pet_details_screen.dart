@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pile_up/core/resource_manager/asset_path.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
+import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/media_query_values.dart';
 
 class MyPetDetailsScreen extends StatelessWidget {
@@ -11,10 +12,17 @@ class MyPetDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        surfaceTintColor: AppColors.backgroundColor,
         leading: IconButton(
+          focusColor: AppColors.backgroundColor,
           icon: const Icon(Icons.close),
           onPressed: () => Navigator.pop(context),
         ),
+        title: Text(
+          StringManager.appName,
+          style: Theme.of(context).textTheme.headlineLarge,
+        ),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -164,8 +172,9 @@ class MyPetDetailsScreen extends StatelessWidget {
                           ),
                           SizedBox(height: 12.h),
                           Container(
+                            height: context.height * .37,
                             child: Image.asset(AssetPath.medicalRecord,
-                                fit: BoxFit.fitWidth),
+                                fit: BoxFit.fitHeight),
                           ),
                         ],
                       ),

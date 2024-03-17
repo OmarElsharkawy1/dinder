@@ -26,8 +26,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   late TextEditingController passwordConfirmController;
   late TextEditingController firstNameController;
   late TextEditingController lastNameController;
-  late TextEditingController universityController;
-  late TextEditingController majorController;
   DateTime selectedDate = DateTime.now();
   String selectedValue = 'Option 1';
 
@@ -39,8 +37,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     passwordConfirmController = TextEditingController();
     firstNameController = TextEditingController();
     lastNameController = TextEditingController();
-    universityController = TextEditingController();
-    majorController = TextEditingController();
     super.initState();
   }
 
@@ -52,8 +48,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     passwordConfirmController.dispose();
     firstNameController.dispose();
     lastNameController.dispose();
-    universityController.dispose();
-    majorController.dispose();
     super.dispose();
   }
 
@@ -67,7 +61,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
               Row(
                 children: [
                   ColumnWithTextField(
@@ -106,16 +99,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 text: StringManager.signUp.tr(),
                 onTap: () {
                   if (validation()) {
-                    BlocProvider.of<SignUpWithEmailAndPasswordBloc>(context)
-                        .add(SignUpWithEmailAndPasswordEvent(
-                      phone: phoneController.text,
-                      password: passwordController.text,
-                      major: majorController.text,
-                      university: universityController.text,
-                      name:
-                          '${firstNameController.text} ${lastNameController.text}',
-                      email: emailController.text,
-                    ));
+                    Navigator.pushNamed(context, Routes.mainScreen);
                   } else {
                     errorSnackBar(
                         context, StringManager.pleaseCompleteYourData.tr());
@@ -237,10 +221,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     } else if (lastNameController.text == '') {
       return false;
     } else if (phoneController.text == '') {
-      return false;
-    } else if (universityController.text == '') {
-      return false;
-    } else if (majorController.text == '') {
       return false;
     } else if (passwordController.text == '') {
       return false;

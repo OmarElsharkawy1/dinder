@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pile_up/core/resource_manager/routes.dart';
+import 'package:pile_up/core/service/service_locator.dart';
+import 'package:pile_up/features/matching_screen/presentation/controller/get_dogs_bloc.dart';
+import 'package:pile_up/features/my_profile_screen/presentation/controller/get_my_profile_bloc.dart';
 
 import 'core/resource_manager/themes/light_theme.dart';
-import 'features/auth/presentation/login_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await ServerLocator().init();
   await ScreenUtil.ensureScreenSize();
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -25,11 +34,21 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       // Use builder only if you need to use library outside ScreenUtilInit context
       builder: (context, child) {
-        return MaterialApp(
-          onGenerateRoute: RouteGenerator.getRoute,
-          initialRoute: Routes.login,
-          debugShowCheckedModeBanner: false,
-          theme: lightTheme,
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => getIt<GetDogsBloc>(),
+            ),
+            BlocProvider(
+              create: (context) => getIt<GetMyProfileBloc>(),
+            ),
+          ],
+          child: MaterialApp(
+            onGenerateRoute: RouteGenerator.getRoute,
+            initialRoute: Routes.login,
+            debugShowCheckedModeBanner: false,
+            theme: lightTheme,
+          ),
         );
       },
     );

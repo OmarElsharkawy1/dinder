@@ -7,8 +7,10 @@ import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/media_query_values.dart';
 import 'package:pile_up/core/widgets/app_bar.dart';
 import 'package:pile_up/core/widgets/drawer.dart';
+import 'package:pile_up/core/widgets/main_button.dart';
 import 'package:pile_up/features/my_pet_details/presentation/my_pet_details_screen.dart';
-import 'package:pile_up/features/my_profile_screen/prsentation/widgets/my_pets_card.dart';
+import 'package:pile_up/features/my_profile_screen/presentation/edit_my_profile_screen.dart';
+import 'package:pile_up/features/my_profile_screen/presentation/widgets/my_pets_card.dart';
 
 class MyProfileScreen extends StatefulWidget {
   const MyProfileScreen({Key? key}) : super(key: key);
@@ -26,6 +28,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
       appBar: homeAppBar(
         context,
         actionIcon: Icons.settings,
+        actionsOnPressed: () {},
         centerWidget: const Text(
           StringManager.appName,
           style: TextStyle(color: AppColors.primaryColor),
@@ -97,6 +100,21 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                   ],
                 ),
               ),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 8.0),
+                child: MainButton(
+                  text: 'Edit Profile',
+                  onTap: () {
+                    PersistentNavBarNavigator.pushNewScreen(
+                      context,
+                      screen: const EditMyProfileScreen(),
+                      withNavBar: false,
+                      pageTransitionAnimation: PageTransitionAnimation.fade,
+                    );
+                  },
+                ),
+              ),
+              const MainButton(text: 'Add a dog'),
               ListView.builder(
                   itemCount: 3,
                   shrinkWrap: true,

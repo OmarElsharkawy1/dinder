@@ -8,7 +8,7 @@ import 'package:pile_up/features/chat_screen/presentation/chat_screen.dart';
 import 'package:pile_up/features/matching_screen/presentation/filter.dart';
 import 'package:pile_up/features/matching_screen/presentation/matching_screen.dart';
 import 'package:pile_up/features/messages_screen/presentation/messages_screen.dart';
-import 'package:pile_up/features/my_profile_screen/prsentation/my_profile_screen.dart';
+import 'package:pile_up/features/my_profile_screen/presentation/my_profile_screen.dart';
 import 'package:pile_up/main_screen.dart';
 
 class Routes {

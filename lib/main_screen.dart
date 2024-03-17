@@ -4,7 +4,7 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:pile_up/core/widgets/drawer.dart';
 import 'package:pile_up/features/e_commerce_screen/e_commerce_screen.dart';
 import 'package:pile_up/features/messages_screen/presentation/messages_screen.dart';
-import 'package:pile_up/features/my_profile_screen/prsentation/my_profile_screen.dart';
+import 'package:pile_up/features/my_profile_screen/presentation/my_profile_screen.dart';
 
 import 'core/resource_manager/colors.dart';
 import 'features/matching_screen/presentation/matching_screen.dart';
