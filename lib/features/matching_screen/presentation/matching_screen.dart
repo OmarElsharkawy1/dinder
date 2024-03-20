@@ -63,7 +63,7 @@ class _MatchingScreenState extends State<MatchingScreen> {
                           },
                           child: PetCard(dog: state.dogs[index]),
                         )
-                      : SizedBox(),
+                      : const SizedBox(),
                 ],
               );
             } else if (state is GetDogsErrorMessageState) {
@@ -71,7 +71,6 @@ class _MatchingScreenState extends State<MatchingScreen> {
             } else if (state is GetDogsLoadingState) {
               return const Text('Loading');
             } else {
-              print(state);
               return const SizedBox();
             }
           },

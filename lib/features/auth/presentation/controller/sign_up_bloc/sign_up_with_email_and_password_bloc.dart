@@ -7,15 +7,20 @@ import 'package:pile_up/features/auth/presentation/controller/sign_up_bloc/sign_
 
 class SignUpWithEmailAndPasswordBloc extends Bloc<
     BaseSignUpWithEmailAndPasswordEvent, SignUpWithEmailAndPasswordState> {
-  SignUpWithEmailAndPasswordUseCase loginWithEmailAndPasswordUseCase;
+  SignUpWithEmailAndPasswordUseCase signUpWithEmailAndPasswordUseCase;
 
   SignUpWithEmailAndPasswordBloc(
-      {required this.loginWithEmailAndPasswordUseCase})
+      {required this.signUpWithEmailAndPasswordUseCase})
       : super(SignUpWithEmailAndPasswordInitial()) {
     on<SignUpWithEmailAndPasswordEvent>((event, emit) async {
       emit(const SignUpWithEmailAndPasswordLoadingState());
-      final result = await loginWithEmailAndPasswordUseCase
-          .call(SignUpModel(email: event.phone, password: event.password,eduLevel: event.eduLevel));
+      final result = await signUpWithEmailAndPasswordUseCase.call(
+        SignUpModel(
+          email: event.phone,
+          password: event.password,
+          confirmPassword: event.confirmPassword,
+        ),
+      );
       result.fold(
           (l) => emit(const SignUpWithEmailAndPasswordSuccessMessageState(
               successMessage: StringManager.loginSuccessfully)),

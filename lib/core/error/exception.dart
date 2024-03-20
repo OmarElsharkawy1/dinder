@@ -8,6 +8,8 @@ class ErrorModelException implements Exception {
   }
 }
 
+class SignInGoogleException implements Exception {}
+
 class ServerException implements Exception {}
 
 class ConnectionTimeoutException implements Exception {}

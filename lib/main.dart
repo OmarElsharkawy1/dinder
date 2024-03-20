@@ -3,6 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pile_up/core/resource_manager/routes.dart';
 import 'package:pile_up/core/service/service_locator.dart';
+import 'package:pile_up/features/auth/presentation/controller/login_bloc/login_with_email_and_password_bloc.dart';
+import 'package:pile_up/features/auth/presentation/controller/sign_in_with_platform_bloc/sign_in_with_platform_bloc.dart';
+import 'package:pile_up/features/auth/presentation/controller/sign_up_bloc/sign_up_with_email_and_password_bloc.dart';
 import 'package:pile_up/features/matching_screen/presentation/controller/get_dogs_bloc.dart';
 import 'package:pile_up/features/my_profile_screen/presentation/controller/get_my_profile_bloc.dart';
 
@@ -36,6 +39,15 @@ class _MyAppState extends State<MyApp> {
       builder: (context, child) {
         return MultiBlocProvider(
           providers: [
+            BlocProvider(
+              create: (context) => getIt<SignUpWithEmailAndPasswordBloc>(),
+            ),
+            BlocProvider(
+              create: (context) => getIt<LoginWithEmailAndPasswordBloc>(),
+            ),
+            BlocProvider(
+              create: (context) => getIt<SignInWithPlatformBloc>(),
+            ),
             BlocProvider(
               create: (context) => getIt<GetDogsBloc>(),
             ),

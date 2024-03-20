@@ -5,6 +5,7 @@ import 'package:pile_up/features/auth/presentation/forget%20password/send_otp_co
 import 'package:pile_up/features/auth/presentation/login_screen.dart';
 import 'package:pile_up/features/auth/presentation/signup/sign_up.dart';
 import 'package:pile_up/features/chat_screen/presentation/chat_screen.dart';
+import 'package:pile_up/features/create_dog_screen/presentation/create_dog_screen.dart';
 import 'package:pile_up/features/matching_screen/presentation/filter.dart';
 import 'package:pile_up/features/matching_screen/presentation/matching_screen.dart';
 import 'package:pile_up/features/messages_screen/presentation/messages_screen.dart';
@@ -24,6 +25,7 @@ class Routes {
   // static const String onBoarding = "/OnBoarding";
   static const String matchingScreen = "/matchingScreen";
   static const String matchingFilterScreen = "/matchingFilterScreen";
+  static const String createDogScreen = "/createDogScreen";
 }
 
 class RouteGenerator {
@@ -59,6 +61,11 @@ class RouteGenerator {
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const MessagesScreen(),
+            transitionsBuilder: customAnimate);
+      case Routes.createDogScreen:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const CreateDogScreen(),
             transitionsBuilder: customAnimate);
 
       case Routes.login:

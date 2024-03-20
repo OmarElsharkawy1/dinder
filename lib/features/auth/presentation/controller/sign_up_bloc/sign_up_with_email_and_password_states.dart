@@ -1,4 +1,3 @@
-
 import 'package:equatable/equatable.dart';
 
 abstract class SignUpWithEmailAndPasswordState extends Equatable {
@@ -8,21 +7,26 @@ abstract class SignUpWithEmailAndPasswordState extends Equatable {
   List<Object> get props => [];
 }
 
-class SignUpWithEmailAndPasswordInitial extends SignUpWithEmailAndPasswordState {}
-class SignUpWithEmailAndPasswordLoadingState extends SignUpWithEmailAndPasswordState{
+class SignUpWithEmailAndPasswordInitial
+    extends SignUpWithEmailAndPasswordState {}
+
+class SignUpWithEmailAndPasswordLoadingState
+    extends SignUpWithEmailAndPasswordState {
   const SignUpWithEmailAndPasswordLoadingState();
 }
-class SignUpWithEmailAndPasswordErrorMessageState extends SignUpWithEmailAndPasswordState{
-  final String errorMessage ;
 
-  const SignUpWithEmailAndPasswordErrorMessageState({required this.errorMessage});
+class SignUpWithEmailAndPasswordErrorMessageState
+    extends SignUpWithEmailAndPasswordState {
+  final String errorMessage;
 
-
+  const SignUpWithEmailAndPasswordErrorMessageState(
+      {required this.errorMessage});
 }
 
-class SignUpWithEmailAndPasswordSuccessMessageState extends SignUpWithEmailAndPasswordState{
-  final String successMessage ;
+class SignUpWithEmailAndPasswordSuccessMessageState
+    extends SignUpWithEmailAndPasswordState {
+  final String successMessage;
 
-  const SignUpWithEmailAndPasswordSuccessMessageState({ required this.successMessage});
-
+  const SignUpWithEmailAndPasswordSuccessMessageState(
+      {required this.successMessage});
 }

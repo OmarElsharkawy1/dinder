@@ -8,6 +8,7 @@ import 'package:pile_up/core/utils/media_query_values.dart';
 import 'package:pile_up/core/widgets/app_bar.dart';
 import 'package:pile_up/core/widgets/drawer.dart';
 import 'package:pile_up/core/widgets/main_button.dart';
+import 'package:pile_up/features/create_dog_screen/presentation/create_dog_screen.dart';
 import 'package:pile_up/features/my_pet_details/presentation/my_pet_details_screen.dart';
 import 'package:pile_up/features/my_profile_screen/presentation/edit_my_profile_screen.dart';
 import 'package:pile_up/features/my_profile_screen/presentation/widgets/my_pets_card.dart';
@@ -114,7 +115,17 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                   },
                 ),
               ),
-              const MainButton(text: 'Add a dog'),
+              MainButton(
+                text: 'Add a dog',
+                onTap: () {
+                  PersistentNavBarNavigator.pushNewScreen(
+                    context,
+                    screen: const CreateDogScreen(),
+                    withNavBar: false,
+                    pageTransitionAnimation: PageTransitionAnimation.fade,
+                  );
+                },
+              ),
               ListView.builder(
                   itemCount: 3,
                   shrinkWrap: true,

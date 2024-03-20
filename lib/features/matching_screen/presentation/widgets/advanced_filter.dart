@@ -25,10 +25,10 @@ class _AdvancedFilterState extends State<AdvancedFilter> {
     return SingleChildScrollView(
       child: Column(
         children: [
+          // SizedBox(height: 16.h),
+          // Text('What is you availability',
+          //     style: Theme.of(context).textTheme.titleSmall),
           SizedBox(height: 16.h),
-          Text('What is you availability',
-              style: Theme.of(context).textTheme.titleSmall),
-          SizedBox(height: 4.h),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 1),
             decoration: BoxDecoration(

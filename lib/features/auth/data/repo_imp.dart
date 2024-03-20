@@ -13,7 +13,18 @@ class RepositoryImp extends BaseRepository {
   RepositoryImp({required this.baseRemotelyDataSource});
 
   @override
-  Future<Either<Map<String, dynamic>, Failure>> loginWithEmailAndPassword(AuthModel authModel) async {
+  Future<Either<AuthWithGoogleModel, Failure>> signWithGoogle() async {
+    try {
+      final result = await baseRemotelyDataSource.sigInWithGoogle();
+      return Left(result);
+    } on Exception catch (e) {
+      return Right(DioHelper.buildFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<Map<String, dynamic>, Failure>> loginWithEmailAndPassword(
+      AuthModel authModel) async {
     try {
       final result =
           await baseRemotelyDataSource.loginWithEmailAndPassword(authModel);
@@ -24,7 +35,8 @@ class RepositoryImp extends BaseRepository {
   }
 
   @override
-  Future<Either<MyDataModel, Failure>> signUpWithEmailAndPassword(SignUpModel signUpModel) async{
+  Future<Either<Map<String, dynamic>, Failure>> signUpWithEmailAndPassword(
+      SignUpModel signUpModel) async {
     try {
       final result =
           await baseRemotelyDataSource.signUpWithEmailAndPassword(signUpModel);

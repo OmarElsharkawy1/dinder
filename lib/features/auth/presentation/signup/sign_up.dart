@@ -1,16 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pile_up/core/resource_manager/asset_path.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/resource_manager/routes.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
 import 'package:pile_up/core/utils/app_size.dart';
+import 'package:pile_up/core/utils/media_query_values.dart';
 import 'package:pile_up/core/widgets/app_bar.dart';
 import 'package:pile_up/core/widgets/main_button.dart';
 import 'package:pile_up/core/widgets/column_with_text_field.dart';
 import 'package:pile_up/core/widgets/snack_bar.dart';
-import 'package:pile_up/features/auth/presentation/controller/sign_up_bloc/sign_up_with_email_and_password_bloc.dart';
-import 'package:pile_up/features/auth/presentation/controller/sign_up_bloc/sign_up_with_email_and_password_events.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -61,29 +61,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  ColumnWithTextField(
-                    text: StringManager.firstName.tr(),
-                    controller: firstNameController,
-                    width: AppSize.screenWidth! * .4,
-                  ),
-                  const Spacer(),
-                  ColumnWithTextField(
-                    text: StringManager.secondName.tr(),
-                    controller: lastNameController,
-                    width: AppSize.screenWidth! * .4,
-                  ),
-                ],
+              SizedBox(height: 50.h),
+              Align(
+                alignment: Alignment.center,
+                child: Image.asset(
+                  AssetPath.logo,
+                  height: 120.w,
+                  width: 120.w,
+                ),
               ),
-              ColumnWithTextField(
-                text: StringManager.phoneNum.tr(),
-                controller: phoneController,
-              ),
-              ColumnWithTextField(
-                text: StringManager.email.tr(),
-                controller: emailController,
-              ),
+              SizedBox(height: 50.h),
               ColumnWithTextField(
                 text: StringManager.password.tr(),
                 controller: passwordController,
@@ -99,7 +86,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 text: StringManager.signUp.tr(),
                 onTap: () {
                   if (validation()) {
-                    Navigator.pushNamed(context, Routes.mainScreen);
+                    Navigator.pushNamed(context, Routes.createDogScreen);
                   } else {
                     errorSnackBar(
                         context, StringManager.pleaseCompleteYourData.tr());
@@ -140,20 +127,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: selectedDate, // Refer step 1
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2025),
-    );
-    if (picked != null && picked != selectedDate) {
-      setState(() {
-        selectedDate = picked;
-      });
-    }
-  }
-
   Widget dropDownSignUp({required String text, required String hintText}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -164,11 +137,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
               fontSize: AppSize.defaultSize! * 1.4,
               fontWeight: FontWeight.w700),
         ),
-        SizedBox(
-          height: AppSize.defaultSize! * .3,
-        ),
+        SizedBox(height: 3.h),
         Container(
-          width: AppSize.screenWidth! * .4,
+          width: context.width * .4,
           decoration: BoxDecoration(
               border: Border.all(color: AppColors.borderColor),
               borderRadius: BorderRadius.circular(AppSize.defaultSize! * .5)),
