@@ -17,8 +17,10 @@ class LoginWithEmailAndPasswordBloc extends Bloc<
       final result = await loginWithEmailAndPasswordUseCase
           .call(AuthModel(email: event.email, password: event.password));
       result.fold(
-          (l) => emit(const LoginWithEmailAndPasswordSuccessMessageState(
-              successMessage: StringManager.loginSuccessfully)),
+          (l) => emit(LoginWithEmailAndPasswordSuccessMessageState(
+                successMessage: StringManager.loginSuccessfully,
+                authModelResponse: l,
+              )),
           (r) => emit(LoginWithEmailAndPasswordErrorMessageState(
               errorMessage: DioHelper().getTypeOfFailure(r))));
     });

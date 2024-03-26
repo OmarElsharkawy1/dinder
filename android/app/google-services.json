@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "284254256251",
+    "project_id": "auth-dinder",
+    "storage_bucket": "auth-dinder.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:284254256251:android:7e44b00925f5fe75e476de",
+        "android_client_info": {
+          "package_name": "com.example.dinder"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZKpuDOOB0ropE5BZlf9nNL_wMw8kHo20"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

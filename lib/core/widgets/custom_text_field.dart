@@ -28,7 +28,10 @@ class CustomTextField extends StatefulWidget {
     this.suffixIcon,
     this.onTap,
     this.hintText,
-    this.hintStyle, this.width, this.height, this.maxLines,
+    this.hintStyle,
+    this.width,
+    this.height,
+    this.maxLines,
   }) : super(key: key);
 
   @override
@@ -39,35 +42,32 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: widget.height??AppSize.defaultSize! * 4,
-      width: widget.width?? AppSize.screenWidth! - (AppSize.defaultSize! * 4),
+      height: widget.height ?? AppSize.defaultSize! * 4,
+      width: widget.width ?? AppSize.screenWidth! - (AppSize.defaultSize! * 4),
       child: TextFormField(
         onTap: widget.onTap,
-maxLines: widget.maxLines,
+        maxLines: widget.maxLines,
         readOnly: widget.readOnly,
-        style: TextStyle(fontSize: AppSize.defaultSize!*1.4),
-
-
+        style: TextStyle(fontSize: AppSize.defaultSize! * 1.4),
         decoration: InputDecoration(
           labelText: widget.labelText,
           hintText: widget.hintText,
-          contentPadding:   EdgeInsets.all(AppSize.defaultSize!),
-
-          hintStyle: widget.hintStyle??TextStyle(
-            color: AppColors.greyColor,
-            fontSize: AppSize.defaultSize!*1.4,
-            fontWeight: FontWeight.w400
-          ),
+          contentPadding: EdgeInsets.all(AppSize.defaultSize!),
+          hintStyle: widget.hintStyle ??
+              TextStyle(
+                  color: AppColors.greyColor,
+                  fontSize: AppSize.defaultSize! * 1.4,
+                  fontWeight: FontWeight.w400),
           suffixIcon: widget.suffixIcon,
           labelStyle: TextStyle(
             color: AppColors.primaryColor,
             fontSize: AppSize.defaultSize! * 1.5,
           ),
           prefixIcon: widget.prefixIcon,
-            enabledBorder:OutlineInputBorder(
-              borderSide:
-              BorderSide(color: AppColors.borderColor.withOpacity(.4)),
-            ),
+          enabledBorder: OutlineInputBorder(
+            borderSide:
+                BorderSide(color: AppColors.borderColor.withOpacity(.4)),
+          ),
           border: OutlineInputBorder(
             borderSide:
                 BorderSide(color: AppColors.borderColor.withOpacity(.4)),
@@ -79,7 +79,6 @@ maxLines: widget.maxLines,
               borderSide:
                   BorderSide(color: AppColors.borderColor.withOpacity(.4))),
         ),
-
         controller: widget.controller,
         keyboardType: widget.keyboardType,
         obscureText: widget.obscureText,

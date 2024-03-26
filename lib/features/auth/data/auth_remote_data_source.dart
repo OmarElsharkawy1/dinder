@@ -1,17 +1,19 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pile_up/core/error/exception.dart';
 import 'package:pile_up/core/models/my_data_model.dart';
 import 'package:pile_up/core/utils/api_helper.dart';
 import 'package:pile_up/core/utils/constant_api.dart';
 import 'package:pile_up/core/utils/methods.dart';
+import 'package:pile_up/features/auth/domain/model/authModelResponse.dart';
 import 'package:pile_up/features/auth/domain/use_case/login_with_email_and_password_use_case.dart';
 import 'package:pile_up/features/auth/domain/use_case/sign_up_use_case.dart';
 
 abstract class BaseRemotelyDataSource {
-  Future<Map<String, dynamic>> loginWithEmailAndPassword(AuthModel authModel);
+  Future<AuthModelResponse> loginWithEmailAndPassword(AuthModel authModel);
 
   Future<Map<String, dynamic>> signUpWithEmailAndPassword(
       SignUpModel signUpModel);
@@ -21,7 +23,7 @@ abstract class BaseRemotelyDataSource {
 
 class AuthRemotelyDateSource extends BaseRemotelyDataSource {
   @override
-  Future<Map<String, dynamic>> loginWithEmailAndPassword(
+  Future<AuthModelResponse> loginWithEmailAndPassword(
       AuthModel authModel) async {
     final body = {
       ConstantApi.email: authModel.email,
@@ -34,8 +36,12 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
         data: body,
       );
       Map<String, dynamic> jsonData = response.data;
-      Methods.instance.saveUserToken(authToken: jsonData['access_token']);
-      return jsonData;
+
+      AuthModelResponse authModelResponse =
+          AuthModelResponse.fromJson(jsonData);
+
+      Methods.instance.saveUserToken(authToken: authModelResponse.token);
+      return authModelResponse;
     } on DioException catch (e) {
       throw DioHelper.handleDioError(
           dioError: e, endpointName: "loginWithEmailAndPassword");
@@ -80,7 +86,8 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
   @override
   Future<AuthWithGoogleModel> sigInWithGoogle() async {
     // ignore: no_leading_underscores_for_local_identifiers
-    final _googleSignIn = GoogleSignIn(scopes: ['email']);
+    final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
+    final _auth = FirebaseAuth.instance;
     Future<GoogleSignInAccount?> login() => _googleSignIn.signIn();
     // // ignore: unused_element
     // Future logout() => _googleSignIn.disconnect();

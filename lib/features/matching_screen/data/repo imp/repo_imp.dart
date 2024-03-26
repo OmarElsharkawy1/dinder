@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:pile_up/core/error/failure.dart';
 import 'package:pile_up/core/utils/api_helper.dart';
-import 'package:pile_up/features/matching_screen/data/data%20source/jobs_remote_data_source.dart';
+import 'package:pile_up/features/matching_screen/data/data%20source/get_dogs_remote_data_source.dart';
 import 'package:pile_up/features/matching_screen/domain/model/dog_model.dart';
 import 'package:pile_up/features/matching_screen/domain/repo/dogs_base_repo.dart';
 

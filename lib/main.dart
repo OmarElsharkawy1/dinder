@@ -1,20 +1,26 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pile_up/core/resource_manager/routes.dart';
 import 'package:pile_up/core/service/service_locator.dart';
+import 'package:pile_up/core/utils/methods.dart';
 import 'package:pile_up/features/auth/presentation/controller/login_bloc/login_with_email_and_password_bloc.dart';
 import 'package:pile_up/features/auth/presentation/controller/sign_in_with_platform_bloc/sign_in_with_platform_bloc.dart';
 import 'package:pile_up/features/auth/presentation/controller/sign_up_bloc/sign_up_with_email_and_password_bloc.dart';
 import 'package:pile_up/features/matching_screen/presentation/controller/get_dogs_bloc.dart';
 import 'package:pile_up/features/my_profile_screen/presentation/controller/get_my_profile_bloc.dart';
-
 import 'core/resource_manager/themes/light_theme.dart';
+
+String? token;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ServerLocator().init();
   await ScreenUtil.ensureScreenSize();
+  await Firebase.initializeApp();
+  token = await Methods.instance.returnUserToken();
   runApp(const MyApp());
 }
 
@@ -56,6 +62,7 @@ class _MyAppState extends State<MyApp> {
             ),
           ],
           child: MaterialApp(
+            builder: EasyLoading.init(),
             onGenerateRoute: RouteGenerator.getRoute,
             initialRoute: Routes.login,
             debugShowCheckedModeBanner: false,

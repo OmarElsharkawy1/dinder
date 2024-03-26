@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pile_up/core/resource_manager/asset_path.dart';
 import 'package:pile_up/core/resource_manager/colors.dart';
 import 'package:pile_up/core/resource_manager/routes.dart';
 import 'package:pile_up/core/resource_manager/string_manager.dart';
+import 'package:pile_up/core/utils/app_size.dart';
 import 'package:pile_up/core/widgets/column_with_text_field.dart';
 import 'package:pile_up/core/widgets/custom_text.dart';
 import 'package:pile_up/core/widgets/main_button.dart';
@@ -19,6 +21,11 @@ import 'package:pile_up/features/auth/presentation/controller/sign_in_with_platf
 
 import 'controller/login_bloc/login_with_email_and_password_events.dart';
 
+GoogleSignIn _googleSignIn = GoogleSignIn(scopes: <String>[
+  'email',
+  'https://www.googleapis.com/auth/contatcs.readonly'
+]);
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -27,15 +34,35 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  late GoogleSignInAccount? currentUser;
   late TextEditingController emailController;
   late TextEditingController passwordController;
 
   @override
   void initState() {
+    super.initState();
     emailController = TextEditingController();
     passwordController = TextEditingController();
-    super.initState();
+    _googleSignIn.onCurrentUserChanged.listen((account) {
+      setState(() {
+        currentUser = account!;
+      });
+      if (currentUser != null) {
+        print('User is already registered');
+      }
+    });
+    _googleSignIn.signInSilently();
   }
+
+  Future<void> handleSignIn() async {
+    try {
+      await _googleSignIn.signIn();
+    } catch (error) {
+      print("Sign in error: $error");
+    }
+  }
+
+  Future<void> handleSignOut() => _googleSignIn.disconnect();
 
   @override
   void dispose() {
@@ -48,14 +75,18 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    AppSize().init(context);
     return Scaffold(
       body: BlocListener<LoginWithEmailAndPasswordBloc,
           LoginWithEmailAndPasswordState>(
         listener: (context, state) {
           if (state is LoginWithEmailAndPasswordSuccessMessageState) {
             EasyLoading.dismiss();
-            Navigator.pushNamedAndRemoveUntil(
-                context, Routes.mainScreen, (route) => false);
+            state.authModelResponse.isCompleted
+                ? Navigator.pushNamedAndRemoveUntil(
+                    context, Routes.mainScreen, (route) => false)
+                : Navigator.pushNamedAndRemoveUntil(
+                    context, Routes.myProfileScreen, (route) => false);
           } else if (state is LoginWithEmailAndPasswordErrorMessageState) {
             EasyLoading.dismiss();
             errorSnackBar(context, StringManager.unexpectedError);
@@ -66,12 +97,8 @@ class _LoginScreenState extends State<LoginScreen> {
         child: BlocListener<SignInWithPlatformBloc, SignInWithPlatformState>(
           listener: (context, state) async {
             if (state is SignWithGoogleSuccessMessageState) {
-              // Methods.instance.clearAuthData();
-              // BlocProvider.of<GetMyDataBloc>(context).add(GetMyDataEvent());
               if (state.userData.apiUserData.phone == null) {
               } else {
-                // BlocProvider.of<AddInfoBloc>(context).add(
-                //     AddInfoEvent(email: state.userData.userData.email.toString()));
                 Navigator.pushNamedAndRemoveUntil(
                   context,
                   Routes.mainScreen,
@@ -79,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 );
               }
             } else if (state is SignWithGoogleErrorMessageState) {
-              print('${state.errorMessage}ssssssssss');
+              // print('${state.errorMessage}ssssssssss');
               errorSnackBar(context, state.errorMessage);
             } else if (state is SignWithPlatFormLoadingState) {}
           },
@@ -132,26 +159,25 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               Align(
                 alignment: Alignment.centerRight,
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, Routes.forgetPassword);
-                  },
-                  child: CustomText(
-                    text: StringManager.forgetYourPassword.tr(),
-                    color: AppColors.primaryColor,
-                    fontSize: 10.sp,
-                  ),
+                // child: TextButton(
+                //   onPressed: () {
+                //     Navigator.pushNamed(context, Routes.forgetPassword);
+                //   },
+                child: CustomText(
+                  text: StringManager.forgetYourPassword.tr(),
+                  color: AppColors.primaryColor,
+                  fontSize: 10.sp,
                 ),
               ),
+              // ),
               MainButton(
                 text: StringManager.signIn.tr(),
                 onTap: () {
                   if (validation()) {
-                    BlocProvider.of<LoginWithEmailAndPasswordBloc>(context)
-                        .add(LoginWithEmailAndPasswordEvent(
-                      email: emailController.text,
-                      password: passwordController.text,
-                    ));
+                    BlocProvider.of<LoginWithEmailAndPasswordBloc>(context).add(
+                        LoginWithEmailAndPasswordEvent(
+                            email: emailController.text,
+                            password: 'Nn@\$${passwordController.text}'));
                   } else {
                     errorSnackBar(
                         context, StringManager.pleaseCompleteYourData);

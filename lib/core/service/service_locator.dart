@@ -8,7 +8,7 @@ import 'package:pile_up/features/auth/domain/use_case/sign_up_use_case.dart';
 import 'package:pile_up/features/auth/presentation/controller/login_bloc/login_with_email_and_password_bloc.dart';
 import 'package:pile_up/features/auth/presentation/controller/sign_in_with_platform_bloc/sign_in_with_platform_bloc.dart';
 import 'package:pile_up/features/auth/presentation/controller/sign_up_bloc/sign_up_with_email_and_password_bloc.dart';
-import 'package:pile_up/features/matching_screen/data/data%20source/jobs_remote_data_source.dart';
+import 'package:pile_up/features/matching_screen/data/data%20source/get_dogs_remote_data_source.dart';
 import 'package:pile_up/features/matching_screen/data/repo%20imp/repo_imp.dart';
 import 'package:pile_up/features/matching_screen/domain/repo/dogs_base_repo.dart';
 import 'package:pile_up/features/matching_screen/domain/use_case/get_dogs_use_case.dart';
